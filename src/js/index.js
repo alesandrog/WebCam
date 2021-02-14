@@ -1,66 +1,84 @@
-/*// Grab elements, create settings, etc.
-var video = document.getElementById('video');
-
-// Get access to the camera!
-if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    // Not adding `{ audio: true }` since we only want video now
-    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-        //video.src = window.URL.createObjectURL(stream);
-        video.srcObject = stream;
-        video.play();
-    });
-}
-
-
-function stopVideo(){
-    video.stop();
-}
-
-
-
-<div class="container" style="height: 100%; width: 100%;">
-<video id="video" width="640" height="480" autoplay></video>
-<button id="snap" onclick="stopVideo()">Snap Photo</button>
-<canvas id="canvas" width="640" height="480"></canvas>
-</div>
-*/
-
+// Entornos
 let video;
-let buttonRed;
-let buttonYellow;
+let canvas1;
+let canvas2;
+let imagen;
+let sinFiltro;
+
+// Variables
 let R = 0;
 let G = 0;
 let B = 0;
-let canvas1;
-let canvas2;
-function setup(){
+let showFilter = false;
+let imageFlag = true;
 
-    video = createCapture(VIDEO);
-    video.size(320,240);
-    createCanvas(320,240);
-    background(51);
-    buttonRed = createButton('RED');
-    buttonYellow = createButton('YELLOW');
-    buttonRed.mousePressed(filtro);
-    buttonRed.position(100,100)
-    buttonYellow.mousePressed(filtro2);
-    buttonYellow.position(160,100)
+// Botones
+let buttonRed;
+let buttonYellow;
+let calamardo;
+
+function setup() {
+  // Init video
+  video = createCapture(VIDEO);
+  video.size(320, 240);
+  canvas1 = createCanvas(320, 240);
+  canvas1.parent("filterContainer");
+  video.parent("videoContainer");
+  background(51);
+
+  // Button definition
+  sinFiltro = createButton("Normal");
+  buttonRed = createButton("Rojo");
+  buttonYellow = createButton("Sephia");
+  calamardo = createButton("Calamardo");
+  // Button actions
+  sinFiltro.mousePressed(normal);
+  buttonRed.mousePressed(rojo);
+  buttonYellow.mousePressed(sephia);
+  calamardo.mousePressed(filtroCalamardo);
+  // Button containers
+  sinFiltro.parent("buttonContainer");
+  buttonRed.parent("buttonContainer");
+  buttonYellow.parent("buttonContainer");
+  calamardo.parent("buttonContainer");
 }
 
-function draw(){
-    tint(R,G,B)
-    image(video, 0, 0, width, width * video.height / video.width);
+function draw() {
+  if (showFilter) {
+    tint(R, G, B);
+  }else{
+    tint(255,255,255)
+  }
+  image(video, 0, 0, width, (width * video.height) / video.width);
+  if (imagen != null && imagen != undefined && imageFlag == true) {
+    imagen.remove();
+  }
 }
 
-
-function off(){
-    video = null;
+function rojo() {
+  showFilter = true;
+  imageFlag = true;
+  R = 255;
+  G = 0;
+  B = 0;
 }
 
-function filtro(){
-    R = 255;
+function sephia() {
+  showFilter = true;
+  imageFlag = true;
+  R = 223;
+  G = 195;
+  B = 94;
 }
 
-function filtro2(){
-    R = 100;
+function filtroCalamardo() {
+  showFilter = false;
+  imageFlag = false;
+  imagen = createImg("img/calamardo.png", "the p5 magenta asterisk");
+  imagen.parent("filterContainer");
+}
+
+function normal() {
+  showFilter = false;
+  imageFlag = true;
 }
