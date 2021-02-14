@@ -1,0 +1,81 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+nav{
+    width: 100%;
+    margin-bottom: 30px;
+    color: white;
+
+}
+
+
+.navbar.navbar-light.bg-light{
+    background-color: #595CAE !important;
+    color: white;
+}
+
+.container-fluid{
+    background-color: #595CAE !important;
+}
+
+.container-fluid span{
+    color: white !important;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button{
+    width: 100px;
+    background-color: #595CAE;
+    color: white;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: none;
+    border-radius: 20px !important;
+    margin: 10px !important;
+}
+
+.app-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#videoContainer{
+    height: 400px;
+    width: 400px;
+}
+
+
+
+#filterContainer{
+    height: 400px;
+    width: 400px;
+}
+
+#buttonContainer{
+    height: 400px;
+    width: 100px;
+    flex-direction: column;
+}
+
+#buttonContainer h1{
+    align-self: flex-start;
+    justify-self: self-start;
+}
+
+img{
+    position: absolute;
+}
